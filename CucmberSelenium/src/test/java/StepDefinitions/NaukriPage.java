@@ -50,7 +50,7 @@ public class NaukriPage {
 
         //driver.findElement(By.id("")).sendKeys("file:///C:/Users/DELL/Downloads/AvinashResume.pdf");
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    driver.quit();
+	    //driver.quit();
 	}
 
 
