@@ -12,15 +12,16 @@ import java.io.File;
 import java.io.IOException;
 
 public class screenshot {
-	 public static void takeScreenshot(WebDriver driver, String fileName) {
+	 public void takeScreenshot(WebDriver driver, String fileName) {
 	        TakesScreenshot ts = (TakesScreenshot) driver;
 	        File source = ts.getScreenshotAs(OutputType.FILE);
-	        File destination = new File("target/screenshots/" + fileName);
+	        File destination = new File("target/screenshot/" + fileName+".png");
 	        try {
 	            FileHandler.copy(source, destination);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
 	    }
+	 
 
 }
