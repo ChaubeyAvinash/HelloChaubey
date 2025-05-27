@@ -1,0 +1,36 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: SSH and deploy
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "Connected to EC2!"
+
+            # Fix: Add npm global path
+            export PATH=$PATH:/home/ubuntu/.npm-global/bin
+
+            cd /home/ubuntu/CI-Next-App/
+            git pull
+
+            pnpm install
+            pnpm prisma generate
+            pnpm run build
+
+            pm2 restart fe-server
+            pm2 restart http-server
+            pm2 restart ws-server
