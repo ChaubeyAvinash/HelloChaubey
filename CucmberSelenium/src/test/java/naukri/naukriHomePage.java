@@ -68,9 +68,9 @@ public class naukriHomePage {
         //driver.findElement(By.id("")).sendKeys("C:\Users\DELL\Downloads");
 	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    //driver.quit();
-	    JavascriptExecutor js = (JavascriptExecutor) driver;
-	    js.executeScript("window.scrollBy(0, 500)"); 
-	    sc.takeScreenshot(driver, "updatePage");
+	    //JavascriptExecutor js = (JavascriptExecutor) driver;
+	    //js.executeScript("window.scrollBy(0, 500)"); 
+	    //sc.takeScreenshot(driver, "updatePage");
 	}
 	
 
