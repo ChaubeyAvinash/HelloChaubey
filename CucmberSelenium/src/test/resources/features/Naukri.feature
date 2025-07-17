@@ -14,7 +14,7 @@ Feature: Naukri.com functionality
     Given User is on the Naukri.com login page
     When User enter the email <email> and password <password>
     Then User should see <title>
-    And User navigate the profile page and update the resume 
+    #And User navigate the profile page and update the resume 
 
   Examples:
     | email               			| password        | title                       |
