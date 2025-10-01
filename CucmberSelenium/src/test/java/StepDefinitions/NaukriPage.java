@@ -19,7 +19,6 @@ import naukri.naukriHomePage;
 import java.time.Duration;
 
 public class NaukriPage {
-	LoginSteps ls = new LoginSteps();
 	naukriHomePage NaukriHomePage = new naukriHomePage();
 	//driverFactory df = new driverFactory();
 	private WebDriver driver;

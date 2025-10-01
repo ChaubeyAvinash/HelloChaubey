@@ -1,22 +1,26 @@
 package naukri;
 
+import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Reporter;
 
 import ScreenShotHandle.screenshot;
-import StepDefinitions.LoginSteps;
 import StepDefinitions.driverFactory;
 
 public class naukriHomePage {
 	
-	LoginSteps ls = new LoginSteps();
+	
 	screenshot sc=new screenshot();
 	//driverFactory df = new driverFactory();
 	private WebDriver driver;
@@ -56,21 +60,23 @@ public class naukriHomePage {
         //Assert.assertEquals(userName, actualTitle);
 	}
 	public void resumeUpdate() {
-		driver.findElement(By.xpath("//div[@class='nI-gNb-drawer__icon-img-wrapper']")).click();
-		//WebDriverWait wait = new WebDriverWait(driver,30);
-		Actions actions = new Actions(driver);
-		actions.moveToElement(driver.findElement(By.className("typ-14Regular mode-date-wrap desg-avail"))).perform();
-	    driver.findElement(By.xpath("//a[@class='nI-gNb-info__sub-link']")).click();
-	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    //driver.findElement(By.id("attachCV")).sendKeys("C:\\Users\\DELL\\Downloads\\Avinash_Chaubey Resume.pdf"); 
-	    driver.findElement(By.xpath("//input[@value='Update resume']")).sendKeys("C:\\Users\\DELL\\Downloads\\Avinash Chaubey Resume (1)"); 
+		
+		driver.findElement(By.xpath(df.getXPath("view_profile"))).click();
+		String filePath = System.getProperty("user.dir") + "\\src\\test\\resources\\Data\\Avinash_Resume.pdf";
 
-        //driver.findElement(By.id("")).sendKeys("C:\Users\DELL\Downloads");
-	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    //driver.quit();
-	    //JavascriptExecutor js = (JavascriptExecutor) driver;
-	    //js.executeScript("window.scrollBy(0, 500)"); 
-	    //sc.takeScreenshot(driver, "updatePage");
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+
+		WebElement update_resume = wait.until(
+		    ExpectedConditions.elementToBeClickable(By.xpath(df.getXPath("update_resume"))));
+		//update_resume.sendKeys(filePath);
+
+		
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].value = arguments[1];", update_resume, filePath);
+
+		
+	    driver.quit();
+	   
 	}
 	
 

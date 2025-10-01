@@ -16,7 +16,8 @@ public class driverFactory {
 	
     public WebDriver getDriver(String browser) {
         WebDriver driver = null;
-
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
         if (browser.equalsIgnoreCase("chrome")) {
     		System.getProperty("webdriver.chrome.driver","E:/JavaPro/src/test/resources/driver/chromedriver.exe");
     	    driver=new ChromeDriver();
@@ -24,7 +25,6 @@ public class driverFactory {
     	    driver.manage().window().maximize();
     	    
         }
-
 
         return driver;
     }
